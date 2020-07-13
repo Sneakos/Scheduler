@@ -73,7 +73,7 @@
             // addToolStripMenuItem
             // 
             this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-            this.addToolStripMenuItem.Size = new System.Drawing.Size(180, 34);
+            this.addToolStripMenuItem.Size = new System.Drawing.Size(126, 34);
             this.addToolStripMenuItem.Text = "Add";
             this.addToolStripMenuItem.Click += new System.EventHandler(this.addToolStripMenuItem_Click);
             // 
@@ -131,6 +131,7 @@
             this.gridTasks.Size = new System.Drawing.Size(1457, 448);
             this.gridTasks.TabIndex = 6;
             this.gridTasks.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.gridTasks_CellContextMenuStripNeeded);
+            this.gridTasks.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridTasks_CellMouseDoubleClick);
             // 
             // cmsTaskActions
             // 

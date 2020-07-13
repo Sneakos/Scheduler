@@ -33,7 +33,7 @@ namespace Scheduler
             SetupOwnerCB();
 
             txtTaskTitle.Text = AddedTask.Text;
-            dtpDueDate.Value = AddedTask.DueDate;
+            dtpDueDate.Value = AddedTask.DueDate.Date;
             cbAlternate.Checked = AddedTask.Alternate;
             numericDaysBetween.Value = AddedTask.DaysBetween;
             cbRecurring.Checked = AddedTask.Recurring;
@@ -67,14 +67,40 @@ namespace Scheduler
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if (ValidateFields() == false)
+                return;
+
             if (cbAlternate.Visible)
                 AddedTask.Alternate = cbAlternate.Checked;
 
             if (numericDaysBetween.Visible)
                 AddedTask.DaysBetween = (int)numericDaysBetween.Value;
 
-            AddedTask.DueDate = dtpDueDate.Value;
-            //AddedTask.OwnedBy = 
+            AddedTask.DueDate = dtpDueDate.Value.Date;
+            AddedTask.OwnedBy = (People)cmbOwner.SelectedValue;
+            AddedTask.Recurring = cbRecurring.Checked;
+            AddedTask.Text = txtTaskTitle.Text;
+
+            DialogResult = DialogResult.OK;
+        }
+
+        private bool ValidateFields()
+        {
+            bool retValue = true;
+
+            if (txtTaskTitle.Text.Length == 0)
+            {
+                lblTaskTitle.Text = "Task Title *";
+                lblTaskTitle.ForeColor = Color.Red;
+                retValue = false;
+            }
+            else
+            {
+                lblTaskTitle.Text = "Task Title";
+                lblTaskTitle.ForeColor = Color.Black;
+            }
+
+            return retValue;
         }
     }
 }

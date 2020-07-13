@@ -1,3 +1,1 @@
-{"Text":"Clean Bathroom","DueDate":"2020-07-12","OwnedBy":3,"Recurring":true,"Alternate":true,"DaysBetween":7,"Completed":false}
-{"Text":"Clean Room","DueDate":"2020-07-20","OwnedBy":2,"Recurring":true,"Alternate":false,"DaysBetween":7,"Completed":false}
-{"Text":"Clean Fish Tank","DueDate":"2020-07-20","OwnedBy":1,"Recurring":true,"Alternate":false,"DaysBetween":7,"Completed":false}
+delete this

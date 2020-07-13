@@ -14,7 +14,13 @@ namespace Scheduler
 {
     public partial class HomePage : Form
     {
+        #region Instance Variables
+
         private List<Task> tasks;
+
+        #endregion Instance Variables
+
+        #region Initialization
 
         public HomePage()
         {
@@ -27,6 +33,8 @@ namespace Scheduler
 
             SetupTaskGrid();
         }
+
+        #endregion Initialization
 
         #region Events
 
@@ -66,6 +74,8 @@ namespace Scheduler
             if (addTask.ShowDialog() == DialogResult.OK)
             {
                 SetupTaskGrid();
+
+                SaveTasks();
             }
         }
 
@@ -91,12 +101,30 @@ namespace Scheduler
                 tasks.Add(addedTask);
 
                 SetupTaskGrid();
+
+                SaveTasks();
             }
         }
 
         private void cbOwner_CheckedChanged(object sender, EventArgs e)
         {
             SetupTaskGrid();
+        }
+
+        private void gridTasks_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewRow row = gridTasks.SelectedCells[0].OwningRow;
+
+            Task selectedTask = (Task)row.DataBoundItem;
+
+            AddTask addTask = new AddTask(selectedTask);
+
+            if (addTask.ShowDialog() == DialogResult.OK)
+            {
+                SetupTaskGrid();
+
+                SaveTasks();
+            }
         }
 
         #endregion Events
@@ -196,8 +224,10 @@ namespace Scheduler
                     currentTasks.Add(taskString);
             }
 
+            tasks.RemoveAll(x => x.Completed == true);
+
             File.WriteAllLines(path, currentTasks);
-            File.WriteAllLines(completedTaskPath, completedTasks);
+            File.AppendAllLines(completedTaskPath, completedTasks);
         }
 
         #endregion File Methods
